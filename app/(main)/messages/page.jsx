@@ -26,8 +26,14 @@ export default function MessagesPage() {
     const conversationId = searchParams.get("id");
     const scrollRef = useRef(null);
 
-    const conversations = useQuery(api.chat.listConversations) || [];
-    const messages = useQuery(api.chat.getMessages, conversationId ? { conversationId: conversationId } : "skip");
+    const conversations = useQuery(api.chat.listConversations);
+if (!conversations) return null;
+    const messages = useQuery(
+  api.chat.getMessages,
+  conversationId ? { conversationId } : "skip"
+);
+
+if (conversationId && !messages) return null;
     const sendMessage = useMutation(api.chat.sendMessage);
 
     const [inputText, setInputText] = useState("");
@@ -80,7 +86,9 @@ export default function MessagesPage() {
                                     <div className="flex-1 text-left overflow-hidden rounded-sm">
                                         <p className="font-bold truncate">{c.otherParticipant?.name}</p>
                                         <p className="text-xs text-gray-500 truncate">
-                                            {formatDistanceToNow(c.lastMessageAt)} ago
+                                            {c.lastMessageAt
+  ? formatDistanceToNow(new Date(c.lastMessageAt))
+  : ""} ago
                                         </p>
                                     </div>
                                 </button>
