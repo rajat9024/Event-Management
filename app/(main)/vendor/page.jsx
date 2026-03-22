@@ -27,7 +27,7 @@ export default function VendorDashboardPage() {
     const vendor = useQuery(api.vendors.getVendorByUserId);
     const updateAvailability = useMutation(api.availability.updateAvailability);
     const router = useRouter();
-    const { mutate: deleteUser, isLoading } = useConvexMutation(api.users.deleteUser);
+    const { mutate: deleteUser, isLoading } = useConvexMutation(api.vendors.deleteUser);
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
