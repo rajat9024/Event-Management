@@ -1,5 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
+
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -55,7 +56,6 @@ export default function MessagesPage() {
         <div className="max-w-7xl mx-auto h-[calc(100vh-160px)] px-6">
             <div className="grid grid-cols-1 md:grid-cols-4 h-full border border-white/10 bg-black/40 backdrop-blur-3xl rounded-3xl overflow-hidden shadow-2xl">
 
-                {/* Sidebar: Conversations */}
                 <div className={`md:col-span-1 border-r border-white/5 flex flex-col ${conversationId ? 'hidden md:flex' : 'flex'}`}>
                     <div className="p-6 border-b border-white/5">
                         <h2 className="text-xl font-bold mb-4">Messages</h2>
@@ -92,7 +92,6 @@ export default function MessagesPage() {
                     </ScrollArea>
                 </div>
 
-                {/* Main Content: Chat */}
                 <div className={`md:col-span-3 flex flex-col ${!conversationId ? 'hidden md:flex' : 'flex'}`}>
                     {conversationId && activeConversation ? (
                         <>
